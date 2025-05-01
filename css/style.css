@@ -290,6 +290,17 @@ nav {
     font-weight: 700;
     margin-bottom: 15px;
     color: var(--accent-color);
+    min-height: 60px; /* Add fixed height for the typing text */
+    display: block;
+}
+
+/* Container for typing text to maintain consistent height */
+.typing-text {
+    position: relative;
+    height: 60px; /* Ensure consistent height */
+    line-height: 1.2;
+    overflow: hidden;
+    display: block;
 }
 
 .hero h2 {

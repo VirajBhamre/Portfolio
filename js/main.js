@@ -72,8 +72,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Smooth scrolling for navigation links
     initSmoothScroll();
     
-    // Initialize typing animation in hero section
-    initTypingAnimation();
+    // Add code syntax highlighting for hero section
+    initCodeHighlighting();
     
     // Initialize terminal animation in about section
     initTerminalAnimation();
@@ -351,6 +351,65 @@ function initSmoothScroll() {
                 requestAnimationFrame(animation);
             }
         });
+    });
+}
+
+// Add code syntax highlighting for the hero section code snippet
+function initCodeHighlighting() {
+    const codeBlock = document.querySelector('.code-animation code');
+    if (!codeBlock) return;
+
+    const code = codeBlock.innerHTML;
+    // Simple syntax highlighting for JavaScript code
+    let highlightedCode = code
+        .replace(/\b(const|let|var|function|return|if|else|for|while)\b/g, '<span class="keyword">$1</span>')
+        .replace(/\b(true|false|null|undefined)\b/g, '<span class="keyword">$1</span>')
+        .replace(/\b(require|console|log|process|env|PORT)\b/g, '<span class="special-keyword">$1</span>')
+        .replace(/(['"`])(?:\\.|[^\\])*?\1/g, '<span class="string">$&</span>')
+        .replace(/\b(\d+)\b/g, '<span class="number">$1</span>')
+        .replace(/\b(get|post|put|delete|listen|use|json)\b/g, '<span class="method">$1</span>')
+        .replace(/(\/\/.*$)/gm, '<span class="comment">$1</span>');
+
+    codeBlock.innerHTML = highlightedCode;
+    
+    // Add a subtle animated line highlight effect
+    animateCodeLines();
+}
+
+// Animated highlight for code lines
+function animateCodeLines() {
+    const codeLines = document.querySelectorAll('.code-animation code');
+    if (!codeLines.length) return;
+    
+    let lineNumber = 0;
+    const lines = codeLines[0].innerHTML.split('\n');
+    const container = codeLines[0].parentElement;
+    
+    // Reset content
+    codeLines[0].innerHTML = '';
+    
+    // Add each line individually for highlighting
+    lines.forEach((line, index) => {
+        if (line.trim()) {
+            const lineElement = document.createElement('div');
+            lineElement.className = 'code-line';
+            lineElement.innerHTML = line;
+            codeLines[0].appendChild(lineElement);
+            
+            // Add hover effect on desktop only
+            if (window.innerWidth > 768) {
+                lineElement.addEventListener('mouseenter', () => {
+                    lineElement.classList.add('glow-line');
+                });
+                lineElement.addEventListener('mouseleave', () => {
+                    lineElement.classList.remove('glow-line');
+                });
+            }
+        } else {
+            const emptyLine = document.createElement('div');
+            emptyLine.innerHTML = '&nbsp;';
+            codeLines[0].appendChild(emptyLine);
+        }
     });
 }
 

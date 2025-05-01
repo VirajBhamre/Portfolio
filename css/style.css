@@ -317,14 +317,13 @@ nav {
 .cta-buttons {
     display: flex;
     gap: 15px;
-    margin-bottom: 20px; /* Add margin to ensure buttons are visible */
+    margin-bottom: 20px;
 }
 
 .hero-image {
     flex: 1;
     position: relative;
     min-width: 300px;
-    margin-top: 40px; /* Add margin to push code animation down */
 }
 
 .code-animation {
@@ -354,30 +353,23 @@ nav {
     line-height: 1.5;
     color: #d4d4d4;
     overflow-x: auto;
+    white-space: pre;
 }
 
 .code-animation code {
     display: block;
 }
 
-/* Add responsive code styles to fix mobile display */
-@media (max-width: 768px) {
+/* Enhanced mobile responsiveness */
+@media (max-width: 992px) {
+    .hero .container {
+        flex-direction: column;
+    }
+    
     .hero-content {
         padding-right: 0;
         text-align: center;
-        margin-bottom: 20px;
-    }
-    
-    .hero h1 {
-        font-size: 36px;
-    }
-    
-    .hero h2 {
-        font-size: 24px;
-    }
-    
-    .hero p {
-        font-size: 16px;
+        margin-bottom: 30px;
     }
     
     .cta-buttons {
@@ -385,25 +377,51 @@ nav {
     }
     
     .code-animation {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-content {
+        margin-bottom: 20px;
+    }
+    
+    .hero h1 {
+        font-size: 38px;
+    }
+    
+    .hero h2 {
+        font-size: 26px;
+    }
+    
+    .hero p {
+        font-size: 16px;
+    }
+    
+    .code-animation {
         padding: 15px;
         font-size: 13px;
-        max-width: 100%;
-        overflow-x: auto;
     }
     
     .code-animation pre {
-        white-space: pre;
         font-size: 12px;
+    }
+    
+    /* Ensure code block is horizontally scrollable */
+    .code-animation {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 }
 
 @media (max-width: 480px) {
     .hero h1 {
-        font-size: 30px;
+        font-size: 32px;
     }
     
     .hero h2 {
-        font-size: 20px;
+        font-size: 22px;
     }
     
     .hero p {
@@ -412,20 +430,26 @@ nav {
     
     .code-animation {
         padding: 12px;
+        max-width: 100%;
     }
     
     .code-animation pre {
-        font-size: 11px;
+        font-size: 10px;
     }
     
-    /* Make code block horizontally scrollable rather than breaking layout */
-    .code-animation {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+    /* More compact layout for very small screens */
+    .hero {
+        padding-top: 100px;
+        padding-bottom: 20px;
     }
     
-    .code-animation pre {
-        min-width: 280px;
+    .cta-buttons {
+        gap: 10px;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        font-size: 14px;
     }
 }
 

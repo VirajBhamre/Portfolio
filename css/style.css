@@ -283,52 +283,46 @@ nav {
     flex: 1;
     padding-right: 50px;
     min-width: 300px;
-    margin-bottom: 300px; /* Add fixed space below the content */
+    position: relative;
 }
 
 /* Title container with fixed height */
 .title-container {
     height: 120px; /* Fixed height for two lines */
     margin-bottom: 15px;
+    overflow: hidden;
 }
 
 .hero h1 {
     font-size: 48px;
     font-weight: 700;
     color: var(--accent-color);
+    margin-bottom: 0;
 }
 
 /* Container for typing text to maintain consistent height */
 .typing-text {
-    display: inline-block;
-    min-height: 120px; /* Ensure space for two lines */
+    display: block;
+    position: relative;
 }
 
 .hero h2 {
     font-size: 32px;
     margin-bottom: 15px;
     opacity: 0.9;
-    /* Position h2 absolutely relative to hero-content */
-    position: absolute;
-    top: 120px; /* Position exactly after the h1's fixed height */
+    margin-top: 30px;
 }
 
 .hero p {
     font-size: 18px;
     margin-bottom: 30px;
     color: var(--text-dark);
-    /* Position p absolutely relative to hero-content */
-    position: absolute;
-    top: 180px; /* Position after h2 with some space */
 }
 
 .cta-buttons {
     display: flex;
     gap: 15px;
     margin-bottom: 20px;
-    /* Position buttons absolutely relative to hero-content */
-    position: absolute;
-    top: 240px; /* Position after p with some space */
 }
 
 .hero-image {

@@ -283,25 +283,33 @@ nav {
     flex: 1;
     padding-right: 50px;
     min-width: 300px;
-    margin-bottom: 300px; /* Add fixed space below the content */
-}
-
-/* Title container with fixed height */
-.title-container {
-    height: 120px; /* Fixed height for two lines */
-    margin-bottom: 15px;
+    position: relative; /* Added for better positioning context */
 }
 
 .hero h1 {
     font-size: 48px;
     font-weight: 700;
+    margin-bottom: 15px;
     color: var(--accent-color);
+    height: 120px; /* Fixed height instead of min-height */
+    overflow: visible; /* Allow text to be visible outside container */
+    display: block;
+    position: relative;
 }
 
 /* Container for typing text to maintain consistent height */
 .typing-text {
-    display: inline-block;
-    min-height: 120px; /* Ensure space for two lines */
+    position: relative;
+    height: 120px; /* Fixed height for the container */
+    line-height: 1.2;
+    display: block;
+    overflow: visible; /* Show all content even if it overflows */
+    white-space: normal; /* Allow text to wrap */
+    word-wrap: break-word; /* Break words if needed */
+    /* Force container to maintain exact height regardless of content */
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 .hero h2 {

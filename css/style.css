@@ -283,6 +283,7 @@ nav {
     flex: 1;
     padding-right: 50px;
     min-width: 300px;
+    position: relative; /* Added for better positioning context */
 }
 
 .hero h1 {
@@ -290,44 +291,52 @@ nav {
     font-weight: 700;
     margin-bottom: 15px;
     color: var(--accent-color);
-    min-height: 120px; /* Increased height to accommodate two lines */
+    height: 120px; /* Fixed height instead of min-height */
+    overflow: visible; /* Allow text to be visible outside container */
     display: block;
+    position: relative;
 }
 
 /* Container for typing text to maintain consistent height */
 .typing-text {
     position: relative;
-    min-height: 120px; /* Increased for two lines */
+    height: 120px; /* Fixed height for the container */
     line-height: 1.2;
     display: block;
+    overflow: visible; /* Show all content even if it overflows */
+    white-space: normal; /* Allow text to wrap */
+    word-wrap: break-word; /* Break words if needed */
+    /* Force container to maintain exact height regardless of content */
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 .hero h2 {
     font-size: 32px;
     margin-bottom: 15px;
     opacity: 0.9;
+    /* Position h2 absolutely relative to hero-content */
+    position: absolute;
+    top: 120px; /* Position exactly after the h1's fixed height */
 }
 
 .hero p {
     font-size: 18px;
     margin-bottom: 30px;
     color: var(--text-dark);
-}
-
-.typing-text::after {
-    content: '|';
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+    /* Position p absolutely relative to hero-content */
+    position: absolute;
+    top: 180px; /* Position after h2 with some space */
 }
 
 .cta-buttons {
     display: flex;
     gap: 15px;
     margin-bottom: 20px;
+    /* Position buttons absolutely relative to hero-content */
+    position: absolute;
+    top: 240px; /* Position after p with some space */
 }
 
 .hero-image {

@@ -284,7 +284,6 @@ nav {
     padding-right: 50px;
     min-width: 300px;
     position: relative;
-    z-index: 2; /* Ensure text is above code block */
 }
 
 /* Title container with fixed height */
@@ -326,12 +325,10 @@ nav {
     margin-bottom: 20px;
 }
 
-/* Hero image container fixes */
 .hero-image {
     flex: 1;
     position: relative;
     min-width: 300px;
-    z-index: 1; /* Lower z-index to ensure it doesn't cover content */
 }
 
 .code-animation {
@@ -341,7 +338,6 @@ nav {
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
     overflow: hidden;
     position: relative;
-    text-align: left; /* Ensure code is left-aligned */
 }
 
 .code-animation::before {
@@ -363,13 +359,10 @@ nav {
     color: #d4d4d4;
     overflow-x: auto;
     white-space: pre;
-    text-align: left; /* Enforce left alignment */
 }
 
 .code-animation code {
     display: block;
-    text-align: left; /* Enforce left alignment */
-    padding-left: 0; /* Remove any left padding */
 }
 
 /* Significantly enhanced mobile responsiveness */

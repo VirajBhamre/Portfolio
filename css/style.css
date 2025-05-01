@@ -577,7 +577,7 @@ nav {
 
 @media (max-width: 480px) {
     .hero {
-        padding-top: 90px;
+        padding-top: 130px; /* Increased from 90px for better spacing on phones */
     }
     
     .hero-title {

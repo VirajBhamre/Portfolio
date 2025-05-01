@@ -1174,3 +1174,209 @@ function addPreloader() {
 
 // Initialize preloader
 addPreloader();
+
+// Initialize header scroll behavior
+function initHeaderScroll() {
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('header');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    }, { passive: true });
+}
+
+// Add background animation elements
+function addBackgroundAnimation() {
+    if (window.innerWidth <= 768 || isLowEndDevice()) return;
+    
+    const container = document.createElement('div');
+    container.className = 'background-pattern';
+    document.body.appendChild(container);
+    
+    // Create fewer elements on lower-end devices
+    const elemCount = window.innerWidth > 1200 ? 5 : 3;
+    
+    for (let i = 0; i < elemCount; i++) {
+        const element = document.createElement('div');
+        element.className = 'pattern-element';
+        
+        // Random size between 100px and 300px
+        const size = Math.random() * 200 + 100;
+        element.style.width = `${size}px`;
+        element.style.height = `${size}px`;
+        
+        // Random position
+        element.style.top = `${Math.random() * 100}%`;
+        element.style.left = `${Math.random() * 100}%`;
+        
+        // Random animation delay
+        element.style.animationDelay = `${Math.random() * 5}s`;
+        
+        container.appendChild(element);
+    }
+}
+
+// Initialize code lines animation
+function initCodeLinesAnimation() {
+    // Only for desktop devices for better performance
+    if (window.innerWidth <= 768) return;
+    
+    const codeBlock = document.querySelector('.code-animation code');
+    if (!codeBlock) return;
+    
+    // Create highlight element
+    const highlight = document.createElement('div');
+    highlight.className = 'code-highlight';
+    codeBlock.parentElement.appendChild(highlight);
+    
+    // Position highlight initially
+    const lineHeight = 24; // Approximate line height
+    let currentLine = 0;
+    const codeLines = codeBlock.innerHTML.split('\n').filter(line => line.trim() !== '').length;
+    
+    // Animate highlight through code lines
+    function animateHighlight() {
+        highlight.style.top = `${currentLine * lineHeight}px`;
+        currentLine = (currentLine + 1) % codeLines;
+        
+        // Random highlight duration between 2-4s for more natural movement
+        setTimeout(animateHighlight, Math.random() * 2000 + 2000);
+    }
+    
+    // Start animation after a delay
+    setTimeout(animateHighlight, 2000);
+}
+
+// Add cursor follow effect
+function initCursorFollowEffect() {
+    // Skip on mobile
+    if (window.innerWidth <= 768 || isLowEndDevice()) return;
+    
+    const cursor = document.createElement('div');
+    cursor.className = 'cursor-follower';
+    document.body.appendChild(cursor);
+    
+    // Track mouse position
+    let mouseX = 0;
+    let mouseY = 0;
+    
+    // Add throttling to reduce calculations
+    let isThrottled = false;
+    
+    document.addEventListener('mousemove', e => {
+        if (!isThrottled) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // Use requestAnimationFrame for smooth animation
+            requestAnimationFrame(() => {
+                cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+            });
+            
+            isThrottled = true;
+            setTimeout(() => {
+                isThrottled = false;
+            }, 10); // 10ms throttle
+        }
+    });
+    
+    // Show cursor
+    setTimeout(() => {
+        cursor.classList.add('cursor-visible');
+    }, 1000);
+    
+    // Add hover effect on interactive elements
+    const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-category, .service-card');
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.classList.add('cursor-hover');
+            el.classList.add('element-hover');
+        });
+        
+        el.addEventListener('mouseleave', () => {
+            cursor.classList.remove('cursor-hover');
+            el.classList.remove('element-hover');
+        });
+    });
+}
+
+// Animate logo on hover
+function animateLogo() {
+    const logo = document.querySelector('.logo');
+    if (!logo) return;
+    
+    logo.addEventListener('mouseenter', () => {
+        logo.classList.add('pulse-enhanced');
+    });
+    
+    logo.addEventListener('mouseleave', () => {
+        setTimeout(() => {
+            logo.classList.remove('pulse-enhanced');
+        }, 300);
+    });
+}
+
+// Add scroll indicator animation
+function addScrollIndicator() {
+    // Skip on mobile
+    if (window.innerWidth <= 768) return;
+    
+    const scrollIndicator = document.createElement('div');
+    scrollIndicator.className = 'scroll-follower';
+    scrollIndicator.innerHTML = `
+        <div class="scroll-follower-inner">
+            <div class="scroll-follower-circle"></div>
+            <span class="scroll-follower-text">Scroll</span>
+        </div>
+    `;
+    
+    document.body.appendChild(scrollIndicator);
+    
+    // Hide on scroll
+    let isVisible = true;
+    let hideTimeout;
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > window.innerHeight) {
+            if (isVisible) {
+                scrollIndicator.style.opacity = '0';
+                isVisible = false;
+            }
+        } else {
+            clearTimeout(hideTimeout);
+            scrollIndicator.style.opacity = '1';
+            isVisible = true;
+        }
+    }, { passive: true });
+}
+
+// Helper function to animate elements with delay
+function animateElementsWithDelay(selector, animationClass, delayStep) {
+    const elements = document.querySelectorAll(selector);
+    
+    elements.forEach((el, index) => {
+        setTimeout(() => {
+            el.style.animation = `${animationClass} 2s ease-in-out infinite`;
+            el.style.animationDelay = `${index * 0.1}s`;
+        }, index * delayStep);
+    });
+}
+
+// Helper function to add hover animation
+function addHoverAnimation(selector, animationClass) {
+    const elements = document.querySelectorAll(selector);
+    
+    elements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            el.classList.add(animationClass);
+        });
+        
+        el.addEventListener('mouseleave', () => {
+            setTimeout(() => {
+                el.classList.remove(animationClass);
+            }, 300);
+        });
+    });
+}

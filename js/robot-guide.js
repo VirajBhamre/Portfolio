@@ -86,6 +86,9 @@ function detectMobileDevice() {
 function positionRobotForMobile() {
     if (!container) return;
     
+    // Clear any existing animations or movement
+    gsap.killTweensOf(container);
+    
     // Use GSAP to set fixed position in bottom right corner
     gsap.set(container, { 
         left: 'auto',
@@ -97,9 +100,9 @@ function positionRobotForMobile() {
         opacity: 1
     });
     
-    // Add subtle floating animation
+    // Add subtle floating animation that doesn't change position
     gsap.to(container, {
-        y: '-=10',
+        y: '-=5',
         duration: 2,
         repeat: -1,
         yoyo: true,

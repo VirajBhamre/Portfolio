@@ -646,6 +646,12 @@ function initScrollAnimations() {
             if (entry.isIntersecting) {
                 const target = entry.target;
                 
+                // Skip if element already has appear class
+                if (target.classList.contains('appear')) {
+                    observer.unobserve(target);
+                    return;
+                }
+                
                 // Get animation type from data attribute or use default
                 const animation = target.dataset.animation || '';
                 const delay = parseInt(target.dataset.delay || 0);
@@ -676,6 +682,11 @@ function initScrollAnimations() {
     
     animatedElements.forEach(item => {
         document.querySelectorAll(item.selector).forEach((element, index) => {
+            // Skip if element already has appear class
+            if (element.classList.contains('appear')) {
+                return;
+            }
+            
             // Apply base animation class if specified
             if (item.animation) {
                 element.dataset.animation = item.animation;

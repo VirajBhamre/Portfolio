@@ -128,7 +128,8 @@ function checkAnimations(scrollInfo) {
     const animatedElements = document.querySelectorAll('.skill-category, .project-card, .contact-item, .contact-form, .terminal, .section-title, .about-text p, .social-links a');
     
     animatedElements.forEach(el => {
-        if (isInView(el, scrollInfo)) {
+        // Only add the appear class if it doesn't already have it
+        if (isInView(el, scrollInfo) && !el.classList.contains('appear')) {
             setTimeout(() => {
                 el.classList.add('appear');
             }, parseInt(el.dataset.delay || 0));
@@ -158,7 +159,7 @@ window.addEventListener('load', function() {
         // Force add appear class to immediate visible elements
         document.querySelectorAll('.skill-category, .project-card, .contact-item, .contact-form, .terminal, .section-title, .about-text p, .social-links a').forEach(element => {
             const rect = element.getBoundingClientRect();
-            if (rect.top <= window.innerHeight * 0.8) {
+            if (rect.top <= window.innerHeight * 0.8 && !element.classList.contains('appear')) {
                 element.classList.add('appear');
             }
         });

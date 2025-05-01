@@ -360,6 +360,75 @@ nav {
     display: block;
 }
 
+/* Add responsive code styles to fix mobile display */
+@media (max-width: 768px) {
+    .hero-content {
+        padding-right: 0;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .hero h1 {
+        font-size: 36px;
+    }
+    
+    .hero h2 {
+        font-size: 24px;
+    }
+    
+    .hero p {
+        font-size: 16px;
+    }
+    
+    .cta-buttons {
+        justify-content: center;
+    }
+    
+    .code-animation {
+        padding: 15px;
+        font-size: 13px;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+    
+    .code-animation pre {
+        white-space: pre;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 30px;
+    }
+    
+    .hero h2 {
+        font-size: 20px;
+    }
+    
+    .hero p {
+        font-size: 14px;
+    }
+    
+    .code-animation {
+        padding: 12px;
+    }
+    
+    .code-animation pre {
+        font-size: 11px;
+    }
+    
+    /* Make code block horizontally scrollable rather than breaking layout */
+    .code-animation {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .code-animation pre {
+        min-width: 280px;
+    }
+}
+
 /* ---------------------------------
     ABOUT SECTION
 --------------------------------- */

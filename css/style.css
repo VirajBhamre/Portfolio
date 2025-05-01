@@ -551,6 +551,22 @@ nav {
         overflow-x: hidden;
         -webkit-overflow-scrolling: touch;
     }
+    
+    /* Code editor text alignment fix for mobile */
+    .code-animation pre {
+        font-size: 12px;
+        line-height: 1.4;
+        padding: 10px;
+        white-space: pre;
+        overflow-x: auto;
+        text-align: left !important;
+    }
+    
+    .code-animation code {
+        word-break: normal;
+        display: block;
+        text-align: left !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1167,6 +1183,21 @@ nav {
     will-change: opacity, transform;
 }
 
+/* Fixed contact section animation - prevent repeating animations */
+.contact-item.appear,
+.social-links a.appear {
+    opacity: 1 !important;
+    transform: translateY(0) translateZ(0) !important;
+    animation: none !important;
+    transition: none !important;
+}
+
+/* These prevent the reappearing animation */
+.contact-item,
+.social-links a {
+    will-change: initial;
+}
+
 /* ---------------------------------
     FOOTER
 --------------------------------- */
@@ -1186,7 +1217,7 @@ footer {
 }
 
 .footer-content p {
-    color: var(--text-dark);
+    color: var (--text-dark);
     margin-bottom: 20px;
 }
 
@@ -1383,6 +1414,24 @@ footer {
     /* Fix for project cards on mobile */
     .projects-grid {
         grid-template-columns: 1fr;
+    }
+    
+    /* Make project links visible on mobile without hover */
+    /* Always show project overlay on mobile */
+    .project-overlay {
+        opacity: 1; 
+        background-color: rgba(58, 58, 58, 0.9);
+        position: absolute;
+        bottom: 0;
+        height: auto;
+        padding: 15px 0;
+    }
+    
+    /* Ensure links are large enough for touch interaction */
+    .project-link {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
     }
 }
 

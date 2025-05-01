@@ -1331,6 +1331,9 @@ function animateLogo() {
 
 // Add scroll indicator animation
 function addScrollIndicator() {
+    // Function disabled to remove scroll indicator
+    return;
+    
     // Skip on mobile
     if (window.innerWidth <= 768) return;
     

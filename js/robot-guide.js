@@ -19,14 +19,14 @@ let lastPositionUpdate = 0; // Timestamp for position throttling
 const sectionMessages = {
     'home': {
         down: "Hi there! I'm Viraj. Welcome to my portfolio! Feel free to scroll down and explore my work.",
-        up: "Welcome back to the top! I'm Viraj, a passionate backend developer ready to help with your projects."
+        up: "Welcome back to the top! I'm Viraj, a passionate fullstack developer ready to help with your projects."
     },
     'about': {
-        down: "Let me tell you a bit about myself. I'm passionate about backend development and building scalable applications!",
+        down: "Let me tell you a bit about myself. I'm passionate about fullstack development and building scalable applications!",
         up: "That's a bit about my background. I combine technical skills with creative problem-solving."
     },
     'skills': {
-        down: "These are my core technical skills. I'm particularly strong in backend development with Node.js and Express!",
+        down: "These are my core technical skills. I'm particularly strong in both frontend and backend development!",
         up: "My diverse skill set allows me to handle both frontend and backend challenges effectively."
     },
     'projects': {
@@ -58,10 +58,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Set behavior based on device type
         if (isMobileDevice) {
-            // For mobile devices - enable random floating
+            // For mobile devices - fixed position in bottom right corner
             isFollowingMouse = false;
             isFloating = true;
-            startRandomFloating();
+            positionRobotForMobile();
         } else {
             // For desktop - enable mouse following
             isFollowingMouse = true;
@@ -82,6 +82,31 @@ function detectMobileDevice() {
                     (navigator.msMaxTouchPoints > 0);
 }
 
+// Position robot in the bottom right corner for mobile devices
+function positionRobotForMobile() {
+    if (!container) return;
+    
+    // Use GSAP to set fixed position in bottom right corner
+    gsap.set(container, { 
+        left: 'auto',
+        right: '20px',
+        top: 'auto',
+        bottom: '20px',
+        x: 0,
+        y: 0,
+        opacity: 1
+    });
+    
+    // Add subtle floating animation
+    gsap.to(container, {
+        y: '-=10',
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+    });
+}
+
 // Handle window resize events to update device detection
 function handleWindowResize() {
     const wasMobile = isMobileDevice;
@@ -90,18 +115,34 @@ function handleWindowResize() {
     // If device type changed
     if (wasMobile !== isMobileDevice) {
         if (isMobileDevice) {
+            // Switch to mobile behavior
             isFollowingMouse = false;
             isFloating = true;
-            startRandomFloating();
+            positionRobotForMobile();
         } else {
+            // Switch to desktop behavior
             isFollowingMouse = true;
             isFloating = false;
             initMouseTracking();
+            
+            // Reset position for desktop
+            gsap.set(container, { 
+                right: 'auto',
+                bottom: 'auto',
+                left: window.innerWidth - 180, 
+                top: 120
+            });
+            
+            // Start following the mouse
+            requestAnimationFrame(followMouse);
+            isAnimationFrameActive = true;
         }
     }
     
-    // Always ensure robot is in bounds when window resizes
-    ensureRobotInBounds();
+    // Always ensure robot is in bounds when window resizes (for desktop)
+    if (!isMobileDevice) {
+        ensureRobotInBounds();
+    }
 }
 
 // Main initialization function
@@ -133,18 +174,22 @@ function initRobotGuide() {
     // Ensure the robot is within bounds when window resizes
     window.addEventListener('resize', handleWindowResize, { passive: true });
     
-    // Set initial position - now in top right area
-    const initialPos = {
-        x: window.innerWidth - 180, 
-        y: 120
-    };
-    
-    // Use GSAP to set initial position - more efficient than direct DOM manipulation
-    gsap.set(container, { 
-        left: initialPos.x,
-        top: initialPos.y,
-        opacity: 0
-    });
+    // Set initial position - now in top right area for desktop, bottom right for mobile
+    if (isMobileDevice) {
+        positionRobotForMobile();
+    } else {
+        const initialPos = {
+            x: window.innerWidth - 180, 
+            y: 120
+        };
+        
+        // Use GSAP to set initial position - more efficient than direct DOM manipulation
+        gsap.set(container, { 
+            left: initialPos.x,
+            top: initialPos.y,
+            opacity: 0
+        });
+    }
     
     // Fade in the robot after initial positioning
     gsap.to(container, {

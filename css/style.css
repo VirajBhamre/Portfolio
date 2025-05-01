@@ -420,16 +420,19 @@ nav {
     font-size: 0.95rem;
     line-height: 1.5;
     color: #f0f0f0;
-    overflow-x: auto;
-    white-space: pre;
+    overflow-x: hidden; /* Changed from auto to hidden to prevent horizontal scrolling */
+    white-space: pre-wrap; /* Changed from pre to pre-wrap to wrap code */
     background-color: transparent;
     counter-reset: line;
+    max-width: 100%;
 }
 
 .code-animation code {
     display: block;
     color: #d4d4d4;
     position: relative;
+    word-wrap: break-word; /* Added for better text wrapping */
+    max-width: 100%;
 }
 
 /* Code highlighting */

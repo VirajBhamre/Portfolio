@@ -298,11 +298,17 @@ nav {
     font-size: 3.2rem;
     font-weight: 700;
     margin-bottom: 15px;
-    color: var(--accent-color);
     position: relative;
     transform: translateY(20px);
     opacity: 0;
     animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards 0.2s;
+    
+    /* New gradient styling replacing the solid blue color */
+    background: linear-gradient(135deg, #60a5fa 0%, #ffffff 50%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0px 2px 8px rgba(96, 165, 250, 0.3);
 }
 
 .hero-subtitle-wrapper {
